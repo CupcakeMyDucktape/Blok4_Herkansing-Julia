@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Waves : MonoBehaviour
 {
+    //Tutorial used; https://www.youtube.com/watch?v=_Ij24zRI9J0
+
     //Public Properties
     public int Dimension = 10;
     public float UVScale = 2f;
