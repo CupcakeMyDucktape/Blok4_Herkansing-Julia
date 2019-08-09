@@ -1,21 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     //Tutorial used for this; https://www.youtube.com/watch?v=MAbei7eMlXg
 
-    Vector3 targetPosition;
-    Vector3 lookAtTarget;
-    Quaternion playerRot;
-    public float rotSpeed = 2;
-    public float speed = 10;
+    Vector3 TargetPosition;
+    Vector3 LookAtTarget;
+    Quaternion PlayerRot;
+
+    public float RotSpeed = 2;
+    public float Speed = 10;
+
+    Rigidbody Rb;
+
+    //Health
+    float MaxHealth;
+    public float Health = 10;
+    public Image HealthBar;
+
+    //UI
+    UIScript GO = new UIScript();
 
     //So the player doesn't instantly move after you pressed play
     bool moving = false;
 
-	void Update () {
+    private void Awake() {
+        Rb = GetComponent<Rigidbody>();
+
+        MaxHealth = Health;
+    }
+
+    void Update() {
+        HealthBar.fillAmount = Health / MaxHealth;
+        //Health -=1;
+
+        if (Health <= 0) {
+            GO.GameOver();
+        }
+    }
+
+    void FixedUpdate () {
 		if (Input.GetMouseButtonDown(0)){
 
             SetTargetPosition();
@@ -23,7 +50,6 @@ public class PlayerController : MonoBehaviour {
         if (moving) {
             Move();
         }
-
     }
 
     void SetTargetPosition() {
@@ -35,14 +61,14 @@ public class PlayerController : MonoBehaviour {
         //Check where you click with your mouse.
         if (Physics.Raycast(ray, out hit, 1000)) {
 
-            targetPosition = hit.point;
+            TargetPosition = hit.point;
 
-            targetPosition.y = transform.position.y;
+            //TargetPosition.y = Rb.position.y;
 
-            lookAtTarget = new Vector3(targetPosition.x - transform.position.x, 
-                transform.position.y,
-                targetPosition.z - transform.position.z);
-            playerRot = Quaternion.LookRotation(lookAtTarget);
+            LookAtTarget = new Vector3(TargetPosition.x - Rb.position.x, 
+                TargetPosition.y - Rb.position.y,
+                TargetPosition.z - Rb.position.z);
+            PlayerRot = Quaternion.LookRotation(LookAtTarget);
 
             moving = true;
         }
@@ -50,15 +76,22 @@ public class PlayerController : MonoBehaviour {
 
     void Move() {
         //Rotate the tank with a smooth move not instantly
-        transform.rotation = Quaternion.Slerp(transform.rotation,
-                                              playerRot,
-                                               rotSpeed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, 
-                                              targetPosition,
-                                               speed * Time.deltaTime);
+        Rb.rotation = Quaternion.Slerp(Rb.rotation,
+                                              PlayerRot,
+                                               RotSpeed * Time.deltaTime);
+        Rb.position = Vector3.MoveTowards(Rb.position, 
+                                              TargetPosition,
+                                               Speed * Time.deltaTime);
 
-        if (transform.position == targetPosition) {
+        if (Rb.position == TargetPosition) {
             moving = false;
         }
     }
+
+    public void Damage() {
+        Debug.Log("Ah fuck, I can't believe you've done this.");
+        Health -= 2;
+        Debug.Log(Health);
+    }
+
 }

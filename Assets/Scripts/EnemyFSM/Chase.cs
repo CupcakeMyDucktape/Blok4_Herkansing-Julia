@@ -17,7 +17,7 @@ public class Chase : EnemyBaseFSM {
         Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation,
                                                     Quaternion.LookRotation(Direction),
                                                     RotSpeed * Time.deltaTime);
-        Enemy.transform.Translate(0,0, Time.deltaTime * Speed);
+        Enemy.transform.Translate(0, 0, Time.deltaTime * Speed);
 
     }
 
