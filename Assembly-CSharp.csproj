@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Downloaded_Assets\AudioManager.cs" />
+    <Compile Include="Assets\Downloaded_Assets\Sound.cs" />
     <Compile Include="Assets\Downloaded_Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Downloaded_Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Downloaded_Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -105,6 +107,8 @@
     <Compile Include="Assets\Scripts\EnemyFSM\Patrol.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
+    <Compile Include="Assets\Scripts\SpawnTurtles.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\UIMainMenu.cs" />
     <Compile Include="Assets\Scripts\UIScripts\UIScript.cs" />
     <Compile Include="Assets\Scripts\WASDWaveFriendlyPlayerController.cs" />
     <Compile Include="Assets\Scripts\Waves\PhysicsHelper.cs" />
@@ -116,6 +120,7 @@
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Sounds\ReadMe_SoundCredit.txt" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

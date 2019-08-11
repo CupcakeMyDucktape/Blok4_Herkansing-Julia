@@ -20,75 +20,99 @@ public class UIScript : MonoBehaviour {
     [Header("Collectable")]
     [Tooltip("Dit gaat om de collectables. Hiervoor word een Singleton gebruikt.")]
     public TextMeshProUGUI CollectableProgress;
+    public int TotalCollected = 0;
+    GameObject[] Turtles;
 
     [Header("Time")]
-    [Tooltip("Dit gaat over de timer.")]
-    public float TimeLeft = 100f;
     public TextMeshProUGUI TimeText;
+    public float CurrentTime;
+    [Tooltip("Dit is hoeveel tijd je mee begint.")]
+    public float StartingTime;
 
-    private void Awake() {
-        //InGameUI.GetComponent<>();
+
+
+    private void Start() {
         InGameUI.SetActive(true);
+        CollectableProgress.text = "Save the turtles!";
+        CurrentTime = StartingTime;
+        if (GameIsPaused) {
+            Resume();
+            GameIsPaused = false;
+        }
+        Time.timeScale = 1f;
 
+        Turtles = GameObject.FindGameObjectsWithTag("Collectable");
+
+        FindObjectOfType<AudioManager>().Play("BackgroundWaves");
     }
 
     void Update () {
         // Pause menu
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (GameIsPaused) {
-                Resume();
-            }
-            else {
-                Pause();
-            }
+            if (GameIsPaused) Resume();
+            else Pause();
         }
 
+        if (GameIsPaused) Time.timeScale = 0f;
+        if (!GameIsPaused) Time.timeScale = 1f;
+
         //Collectable update
-        CollectableProgress.text = Singleton.Instance.Collectables.ToString() + " / " + 5;
+        if (TotalCollected >= Turtles.Length) Win();
 
-        
-
-        //TimeLeft -= 1 * Time.deltaTime;
-        //TimeText.text = TimeLeft.ToString();
+        //Timer
+        CurrentTime -= 1 * Time.deltaTime;
+        if (CurrentTime >= 1) TimeText.text = CurrentTime.ToString("F0"); 
+        else GameOver();
     }
 
-    void Pause() {
-        PauseUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        InGameUI.SetActive(false);
-    }
-
-    public void Resume() {
-        PauseUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-        InGameUI.SetActive(true);
-    }
-
-    public void Restart() {
-        Scene ThisScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(ThisScene.name);
-    }
-
-    public void LoadMenu() {
-        Debug.Log("Clicked on main menu");
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void QuitGame() {
-        Application.Quit();
+    public void CollectedSomething() {
+        TotalCollected += 1;
+        CollectableProgress.text = TotalCollected.ToString() + " / " + Turtles.Length.ToString();
+        FindObjectOfType<AudioManager>().Play("TurtleCollected");
     }
 
     public void GameOver() {
+        GameIsPaused = true;
         Time.timeScale = 0f;
         GameOverUI.SetActive(true);
         InGameUI.SetActive(false);
     }
 
     public void Win() {
+        GameIsPaused = true;
         Time.timeScale = 0f;
         WinScreen.SetActive(true);
         InGameUI.SetActive(false);
+        CollectableProgress.text = "Turtles saved; " + TotalCollected + " / " + Turtles.Length.ToString();
+    }
+
+    // BUTTONS --------------------------------------
+
+    void Pause() {
+        PauseUI.SetActive(true);
+        GameIsPaused = true;
+        InGameUI.SetActive(false);
+    }
+
+    public void Resume() {
+        PauseUI.SetActive(false);
+        GameIsPaused = false;
+        InGameUI.SetActive(true);
+    }
+
+    public void Tutorial() {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadMenu() {
+        SceneManager.LoadScene(0);
+    }
+
+    public void QuitGame() {
+        Application.Quit();
+    }
+
+    public void Level1() {
+        SceneManager.LoadScene(2);
     }
 }

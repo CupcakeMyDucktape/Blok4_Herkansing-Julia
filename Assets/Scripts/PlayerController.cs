@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour {
 
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         HealthBar.text = Health.ToString();
-
+ 
         if (Health <= 0) {
             UI.GameOver();
         }
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Ah fuck, I can't believe you've done this.");
         Health -= 1;
         Debug.Log(Health);
+        FindObjectOfType<AudioManager>().Play("HitSound");
     }
 
 }
