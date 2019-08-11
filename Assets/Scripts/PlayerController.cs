@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour {
+
+    //What you can and can't click
+    public LayerMask Clickable;
 
     //Tutorial used for this; https://www.youtube.com/watch?v=MAbei7eMlXg
 
     Vector3 TargetPosition;
     Vector3 LookAtTarget;
     Quaternion PlayerRot;
+    public float ClickDistance = 100f;
 
     public float RotSpeed = 2;
     public float Speed = 10;
@@ -19,26 +23,24 @@ public class PlayerController : MonoBehaviour {
     //Health
     float MaxHealth;
     public float Health = 10;
-    public Image HealthBar;
+    public TextMeshProUGUI HealthBar;
 
     //UI
-    UIScript GO = new UIScript();
+    public UIScript UI;
 
     //So the player doesn't instantly move after you pressed play
     bool moving = false;
 
     private void Awake() {
         Rb = GetComponent<Rigidbody>();
-
         MaxHealth = Health;
     }
 
     void Update() {
-        HealthBar.fillAmount = Health / MaxHealth;
-        //Health -=1;
+        HealthBar.text = Health.ToString();
 
         if (Health <= 0) {
-            GO.GameOver();
+            UI.GameOver();
         }
     }
 
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         RaycastHit hit;
 
         //Check where you click with your mouse.
-        if (Physics.Raycast(ray, out hit, 1000)) {
+        if (Physics.Raycast(ray, out hit, ClickDistance, Clickable)) {
 
             TargetPosition = hit.point;
 
@@ -90,7 +92,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Damage() {
         Debug.Log("Ah fuck, I can't believe you've done this.");
-        Health -= 2;
+        Health -= 1;
         Debug.Log(Health);
     }
 

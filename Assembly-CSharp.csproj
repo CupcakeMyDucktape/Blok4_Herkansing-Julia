@@ -94,20 +94,24 @@
     <Compile Include="Assets\Downloaded_Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\CameraRotation.cs" />
     <Compile Include="Assets\Scripts\CanonBallScript.cs" />
     <Compile Include="Assets\Scripts\ClickWaveFriendlyPC.cs" />
+    <Compile Include="Assets\Scripts\CollectableBasic.cs" />
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\EnemyFSM\Attack.cs" />
     <Compile Include="Assets\Scripts\EnemyFSM\Chase.cs" />
     <Compile Include="Assets\Scripts\EnemyFSM\EnemyBaseFSM.cs" />
     <Compile Include="Assets\Scripts\EnemyFSM\Patrol.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\UIScripts\UIScript.cs" />
     <Compile Include="Assets\Scripts\WASDWaveFriendlyPlayerController.cs" />
     <Compile Include="Assets\Scripts\Waves\PhysicsHelper.cs" />
     <Compile Include="Assets\Scripts\Waves\WaterFloat.cs" />
     <Compile Include="Assets\Scripts\Waves\WaterFloatPolyWater.cs" />
     <Compile Include="Assets\Scripts\Waves\Waves.cs" />
+    <Compile Include="Assets\Scripts\Waves\Waves2.cs" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Downloaded_Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
@@ -333,6 +337,12 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="TextMeshPro-2017.3-Editor">
+      <HintPath>C:/Users/Julia/Documents/GitHub/Blok4_Herkansing/Assets/Downloaded_Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMeshPro-2017.3-Runtime">
+      <HintPath>C:/Users/Julia/Documents/GitHub/Blok4_Herkansing/Assets/Downloaded_Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Julia/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
@@ -341,12 +351,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Julia/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMeshPro-2017.3-Runtime">
-      <HintPath>C:/Users/Julia/Documents/GitHub/Blok4_Herkansing/Assets/Downloaded_Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="TextMeshPro-2017.3-Editor">
-      <HintPath>C:/Users/Julia/Documents/GitHub/Blok4_Herkansing/Assets/Downloaded_Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Editor.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
